@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+
+	<menuitem title="Neyu Demo" name="menu-neyu-root" />
+	<menuitem title="User Management" name="menu-neyu-user-management" action="neyu.user.management.all" order="0" parent="menu-neyu-root" />
+
+	<action-view title="User Management" name="neyu.user.management.all" model="com.axelor.auth.db.User">
+		<view name="user-grid" type="grid" />
+		<view name="user-form" type="form" />
+	</action-view>
+
+</object-views>

@@ -1,0 +1,13 @@
+apply plugin: "com.axelor.app-module"
+
+apply from: "../libs.gradle"
+apply from: "../version.gradle"
+
+apply {
+	version = openSuiteVersion
+}
+
+axelor {
+	title "Neyu POC"
+	description "Neyu POC Module"
+}

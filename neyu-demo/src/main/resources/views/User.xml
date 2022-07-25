@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+
+	<grid id="neyu-user-grid" name="user-grid" title="Users Management" model="com.axelor.auth.db.User" edit-icon="true" extension="true">
+		<extend target="//field[@name='name']">
+			<insert position="before">
+				<field name="image" widget="image" />
+			</insert>
+		</extend>
+
+		<extend target="/">
+			<attribute name="groupBy" value="group" />
+		</extend>
+	</grid>
+
+	<form name="user-form" title="User Creation" model="com.axelor.auth.db.User" id="neyu-user-form" extension="true">
+		<extend target="//field[@name='name']">
+			<insert position="before">
+				<field name="image" widget="image" />
+			</insert>
+		</extend>
+	</form>
+
+</object-views>
