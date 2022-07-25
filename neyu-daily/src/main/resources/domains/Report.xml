@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models
+  http://axelor.com/xml/ns/domain-models/domain-models_5.4.xsd">
+
+  <module name="daily" package="com.axelor.daily.db"/>
+
+  <entity name="Report">
+    <string name="tl" title="TL"/>
+    <string name="am" title="AM"/>
+    <string name="aff" title="Aff"/>
+    <string name="offer" title="Offer"/>
+    <string name="sub" title="Sub"/>
+    <integer name="lead" title="Lead D-1"/>
+    <decimal name="ar_qa" title="AR_QA"/>
+    <decimal name="tr" title="TR"/>
+    <decimal name="ar_mrp" title="AR_MRP"/>
+    <integer name="lead_mrp" title="Lead_MRP"/>
+    <decimal name="roi" title="ROI"/>
+    <integer name="planned" title="Planned"></integer>
+    <integer name="no_am" title="No."/>
+    <integer name="no_tl" title="No. (TL)"/>
+    <integer name="no_head" title="No. (Head)"/>
+    <many-to-one ref="ReportType" name="type" title="Type"/>
+    <string name="note" title="Note"/>
+    <string name="proof" title="Proof"/>
+    <many-to-one ref="Nation" name="nation"/>
+    <many-to-one ref="Status" name="status"/>
+  </entity>
+
+</domain-models>
