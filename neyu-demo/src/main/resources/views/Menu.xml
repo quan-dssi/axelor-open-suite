@@ -6,6 +6,11 @@
 	<menuitem title="My Team" name="menu-neyu-my-team" action="neyu.my.team.all" order="0" parent="menu-neyu-root" />
 	<menuitem title="All Team Management" name="menu-neyu-user-management" action="neyu.user.management.all" order="1" parent="menu-neyu-root" />
 
+	<menuitem title="Daily Planning" name="menu-neyu-daily-planning" action="neyu.daily.planning.all" order="2" parent="menu-neyu-root" />
+	<menuitem title="Configuation" name="menu-neyu-configuation" order="3" parent="menu-neyu-root" />
+	<menuitem title="Daily Planning Type" name="menu-neyu-daily-planning-type" action="neyu.dayli.planning.type.all" order="4"
+		parent="menu-neyu-configuation" />
+
 	<action-view title="All Team Management" name="neyu.user.management.all" model="com.axelor.auth.db.User">
 		<view name="neyu-user-grid" type="grid" />
 		<view name="neyu-user-form-test" type="form" />
@@ -14,7 +19,18 @@
 	<action-view title="My Team" name="neyu.my.team.all" model="com.axelor.auth.db.User">
 		<view name="neyu-user-grid" type="grid" />
 		<view name="neyu-user-form-test" type="form" />
-		<domain> :_userTeamId IS NOT NULL AND self.activeTeam.id = :_userTeamId)</domain>
+		<domain> :_userTeamId IS NOT NULL AND self.activeTeam.id = :_userTeamId</domain>
 		<context name="_userTeamId" expr="eval: __user__.activeTeam?.id" />
 	</action-view>
+
+	<action-view title="Daily Planning" name="neyu.daily.planning.all" model="com.axelor.neyu.db.DailyPlanning">
+		<view name="neyu-daily-planning-grid" type="grid" />
+		<view name="neyu-daily-planning-form" type="form" />
+	</action-view>
+
+	<action-view title="Daily Planning Type" name="neyu.dayli.planning.type.all" model="com.axelor.neyu.db.DailyPlanningType">
+		<view name="neyu-daily-planning-type-grid" type="grid" />
+		<view name="neyu-daily-planning-type-form" type="form" />
+	</action-view>
+
 </object-views>
