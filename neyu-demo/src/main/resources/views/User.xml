@@ -2,24 +2,80 @@
 <object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
 
-	<grid id="neyu-user-grid" name="user-grid" title="Users Management" model="com.axelor.auth.db.User" edit-icon="true" extension="true">
-		<extend target="//field[@name='name']">
-			<insert position="before">
-				<field name="image" widget="image" />
-			</insert>
-		</extend>
+	<!-- <grid id="neyu-user-grid" name="user-grid" title="Users Management" model="com.axelor.auth.db.User" edit-icon="true" extension="true"> <extend target="//field[@name='name']"> 
+		<insert position="before"> <field name="image" widget="image" /> </insert> </extend> <extend target="/"> <attribute name="groupBy" value="group" /> </extend> 
+		</grid> -->
 
-		<extend target="/">
-			<attribute name="groupBy" value="group" />
-		</extend>
+	<grid name="neyu-user-grid" title="Users Management" groupBy="activeTeam,group" model="com.axelor.auth.db.User">
+		<field name="image" widget="image" />
+		<field name="name" />
+		<field name="email" />
+		<field name="group" form-view="group-form" grid-view="group-grid" />
+		<field name="lineManager" />
+		<field name="activeTeam" />
+		<field name="blocked" />
+		<field name="activateOn" />
+		<field name="expiresOn" />
 	</grid>
 
-	<form name="user-form" title="User Creation" model="com.axelor.auth.db.User" id="neyu-user-form" extension="true">
-		<extend target="//field[@name='name']">
-			<insert position="before">
-				<field name="image" widget="image" />
-			</insert>
-		</extend>
+
+	<!-- <form name="user-form" title="User Creation" model="com.axelor.auth.db.User" id="neyu-user-form" extension="true"> <extend target="//field[@name='name']"> 
+		<insert position="before"> <field name="image" widget="image" /> </insert> </extend> </form> -->
+
+	<form name="neyu-user-form-test" title="User" model="com.axelor.auth.db.User"
+		onNew="action-user-attrs,action-user-apply-applicaton-mode,action-user-default-method,action-attrs-select-in-step-status-select,action-user-attrs-set-pfp-validator-panel-show"
+		onSave="com.axelor.apps.base.web.UserController:validate"
+		onLoad="action-user-attrs,action-user-apply-applicaton-mode,action-attrs-select-in-step-status-select,action-user-attrs-set-pfp-validator-panel-show">
+
+		<panel name="mainUserPanel" colSpan="12">
+			<!-- from axelor-core -->
+			<panel name="overviewPanel" title="Overview" colSpan="12">
+				<field name="image" widget="image" colSpan="12" />
+				<field name="name" placeholder="user name" onChange="action-condition-user-validName" validIf="name.length >= 2" />
+				<field name="code" placeholder="login name" onChange="action-condition-user-validCode" validIf="code.length >= 2"
+					readonlyIf="id &amp;&amp; code == 'admin'" />
+				<field name="group" placeholder="user group" />
+				<field name="email" widget="Email" hidden="true" />
+				<field name="lineManager" />
+				<field name="activeTeam" canEdit="false" form-view="team-form" grid-view="team-grid" onSelect="action-user-attrs-domain-active-team" />
+				<field name="teamSet" canEdit="false" form-view="team-form" grid-view="team-grid" colSpan="12" />
+			</panel>
+			<panel name="authorizationPanel" title="Authorization" colSpan="12">
+				<field name="activateOn"
+					validIf="!activateOn || (activateOn &amp;&amp; !expiresOn) || (activateOn &amp;&amp; expiresOn &amp;&amp; $moment(expiresOn) >= $moment(activateOn))" />
+				<field name="expiresOn"
+					validIf="!expiresOn || (!activateOn &amp;&amp; expiresOn) || (activateOn &amp;&amp; expiresOn &amp;&amp; $moment(expiresOn) >= $moment(activateOn))" />
+				<field name="blocked" />
+				<field name="forcePasswordChange" showIf="id &amp;&amp; !$readonly()" widget="boolean" />
+				<field name="change" title="Change password?" showIf="id &amp;&amp; !$readonly()" widget="boolean" />
+				<panel showIf="change || !id" colSpan="12" itemSpan="12" name="allPasswordsPanel">
+					<field name="oldPassword" title="Your password" placeholder="your password" widget="password" requiredIf="change || !id" />
+					<panel name="passwordPanel" itemSpan="12">
+						<field name="newPassword" title="New password" placeholder="new password" widget="password" requiredIf="change || !id"
+							validIf="(!change &amp;&amp; id) || newPassword.length >= 4" onChange="action-user-validate-password" />
+						<field name="chkPassword" title="Confirm password" placeholder="confirm password" widget="password" requiredIf="change || !id"
+							validIf="chkPassword === newPassword" />
+						<label name="passwordPatternDescriptionLabel" css="label-danger" />
+					</panel>
+					<panel name="passwordOptionsPanel" showIf="code != $user" itemSpan="4">
+						<field name="$generateRandomPassword" title="Generate random password" widget="boolean" onChange="action-user-generate-random-password" />
+						<field name="sendEmailUponPasswordChange" />
+					</panel>
+				</panel>
+				<field name="passwordUpdatedOn" readonly="true" />
+			</panel>
+		</panel>
+
+		<panel name="transientPasswordPanel" hidden="true" colSpan="12">
+			<field name="transientPassword" />
+		</panel>
+
+		<panel-mail name="mailsPanel">
+			<mail-messages limit="4" />
+			<mail-followers />
+		</panel-mail>
 	</form>
+
+
 
 </object-views>
