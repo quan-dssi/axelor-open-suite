@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
+
+	<grid name="report-grid" title="Report"
+		model="com.axelor.daily.db.Report">
+		<field name="status" />
+		<field name="reportId" hidden="true" />
+		<field name="reportDate" />
+
+	</grid>
+
+	<form model="com.axelor.daily.db.Report" title="Report Form"
+		name='report-form' width="large">
+
+		<panel>
+			<field name="status" grid-view="status-grid" colSpan="8"
+				widget="NavSelect" />
+			<button name="submitbtn" title="Submit" onClick="save"
+				colSpan="2" />
+			<button name="rejectbtn" title="Reject" onClick="save"
+				hidden="true" colSpan="2" css="background: red" />
+			<field name="reportDate" />
+			<field name="reportId" hidden="true" />
+		</panel>
+
+		<panel>
+			<panel-related field="reportlines"
+				grid-view="report-line-grid" title="Report lines detail" colSpan="12"
+				height="60" canNew="false" canEdit="true" />
+			<!-- <field name="$test" grid-view="report-grid" colSpan="12"/> -->
+		</panel>
+
+	</form>
+
+</object-views>

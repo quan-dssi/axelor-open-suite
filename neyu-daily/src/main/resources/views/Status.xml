@@ -1,18 +1,68 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <object-views xmlns="http://axelor.com/xml/ns/object-views"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
   http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
 
-  <grid name="status-grid" title="Status" model="com.axelor.daily.db.Status">
-    <field name="name"/>
-  </grid>
+	<grid name="status-grid" title="Status"
+		model="com.axelor.daily.db.Status">
+		<field name="name" />
+	</grid>
 
-  <form model="com.axelor.daily.db.Status" title="Status" name="status-form">
-    <panel>
-      <field name="name"/>
-      <field name="status"/>
-    </panel>
-  </form>
+	<form model="com.axelor.daily.db.Status" title="Status"
+		name="status-form">
+		<panel>
+			<field name="name" colSpan="6" />
+			<field name="status" colSpan="6" />
+			<button name="submitBtn" title="Submit" colSpan="2"
+				css="float: right" onClick="save" />
+		</panel>
+	</form>
+
+	<form model="com.axelor.daily.db.Status" title="Status"
+		name="neyu-status-form">
+		<panel>
+			<field name="name" colSpan="6" />
+			<field name="status" colSpan="6" />
+			<button name="submitBtn" title="Submit" colSpan="2"
+				css="float: right" onClick="save" />
+		</panel>
+	</form>
+
+	<form model="com.axelor.daily.db.Status" title="Status"
+		name="status-custom-form">
+		<panel>
+			<field name="name" colSpan="6" />
+			<field name="status" colSpan="6" />
+			<button name="submitBtn" title="Submit" colSpan="2"
+				css="float: right" onClick="save" />
+		</panel>
+	</form>
+
+	<form model="com.axelor.daily.db.Status" title="Status"
+		name="status-form-custom">
+		<panel>
+			<field name="name" colSpan="6" />
+			<field name="status" colSpan="6" />
+			<button name="submitBtn" title="Submit" colSpan="2"
+				css="float: right" onClick="save" />
+		</panel>
+	</form>
+
+	<form model="com.axelor.daily.db.Status" title="Status"
+		name="neyu-btn-status-form">
+		<panel>
+			<panel>
+				<field name="name" colSpan="6" />
+				<field name="status" colSpan="6" />
+			</panel>
+
+			<panel>
+				<button name="submi123tBtn" title="Submit" colSpan="2"
+					css="float: right" onClick="save" />
+			</panel>
+
+		</panel>
+	</form>
 
 </object-views>

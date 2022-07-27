@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+
+	<dashboard title="Dashboard" name="daily.dashboard.planing">
+		<dashlet action="dashlet.daily.planing.manager.perform" colSpan="4" height="350"/>
+		<dashlet action="dashlet.daily.actual.manager.perform"
+			height="350" colSpan="4" />
+		<dashlet action="dashlet.daily.trust.manager.perform"
+			height="350" colSpan="4" />
+		<dashlet action="dashlet.daily.planing.all" height="600"
+			canSearch="true" colSpan="12" />
+	</dashboard>
+
+	<action-view name="dashlet.daily.planing.all"
+		model="com.axelor.neyu.db.DailyPlanning" title="Daily Planing">
+		<view type="grid" name="neyu-daily-planning-grid" />
+		<view type="form" name="neyu-daily-planning-form" />
+		<!-- <domain>self.salespersonUser = :__user__ and self.statusSelect in 
+			(1, 2) and self.company = :active_company</domain> <context name="active_company" 
+			expr="call:com.axelor.apps.base.service.user.UserService:getUserActiveCompany()" 
+			/> -->
+	</action-view>
+
+	<action-view title="Manager's Performance"
+		name="dashlet.daily.planing.manager.perform">
+		<view type="chart" name="chart.daily.planing.manager.perform" />
+	</action-view>
+	
+	<action-view title="Manager's Performance"
+		name="dashlet.daily.actual.manager.perform">
+		<view type="chart" name="chart.daily.actual.manager.perform" />
+	</action-view>
+	
+	<action-view title="Manager's Performance"
+		name="dashlet.daily.trust.manager.perform">
+		<view type="chart" name="chart.daily.trust.manager.perform" />
+	</action-view>
+
+</object-views>

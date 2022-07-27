@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.4.xsd">
+
+	<module name="neyu" package="com.axelor.neyu.db" />
+
+	<entity name="DailyPlanning">
+		<string name="aff" title="Aff" />
+		<string name="offer" title="Offer" />
+		<string name="sub" title="Sub" />
+
+		<integer name="leadDM1" title="Lead D-1" />
+		<decimal name="arqaDM1" title="AR_QA D-1" precision="8" scale="2" />
+		<decimal name="trDM1" title="TR D-1" precision="8" scale="2" />
+
+		<integer name="leadD0" title="Lead D" />
+		<decimal name="arqaD0" title="AR_QA D" precision="8" scale="2" />
+		<decimal name="trD0" title="TR D" precision="8" scale="2" />
+
+		<integer name="leadDP1" title="Lead D+1" />
+		<decimal name="arqaDP1" title="AR_QA D+1" precision="8" scale="2" />
+		<decimal name="trDP1" title="TR D+1" precision="8" scale="2" />
+		
+		<decimal name="avgROI" title="Avg ROI" precision="8" scale="2" />
+		<decimal name="avgLEADMRP" title="Avg LEAD_MRP" precision="8" scale="2" />
+		<decimal name="avgARMRP" title="Avg AR_MRP" precision="8" scale="2" />
+		
+		<integer name="plan" title="Plan" />
+		<integer name="noAM" title="No (AM)" />
+		<integer name="noTL" title="No (TL)" />
+		<integer name="noH" title="No (H)" />
+		
+		<many-to-one ref="DailyPlanningType" name="dailyPlanningType" title="Planning Type"/>
+		<string name="noteForSale" title="Note For Sale"/>
+		<string name="noteForLineManager" title="Note For Line Manager"/>
+		
+		<string name="geo" title="Geos"/>
+		<many-to-one ref="DailyPlanningParrent" name="dailyPlanningParrent" title="Parrent"/>
+		
+	</entity>
+
+</domain-models>

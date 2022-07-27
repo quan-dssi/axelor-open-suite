@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+
+	<grid name="neyu-daily-planning-grid" title="Daily Planning" groupBy="geo" model="com.axelor.neyu.db.DailyPlanning" editable="true" edit-icon="false">
+		<field name="geo" readonly="true"/>
+		<field name="aff" readonly="true"/>
+		<field name="offer" readonly="true"/>
+		<field name="sub" readonly="true"/>
+
+		<field name="leadDM1" aggregate="sum" readonly="true"/>
+		<field name="arqaDM1" aggregate="sum" readonly="true"/>
+		<field name="trDM1" aggregate="sum" readonly="true"/>
+
+		<field name="leadD0" aggregate="sum" readonly="true"/>
+		<field name="arqaD0" aggregate="sum" readonly="true"/>
+		<field name="trD0" aggregate="sum" readonly="true"/>
+
+		<field name="leadDP1" aggregate="sum" readonly="true"/>
+		<field name="arqaDP1" aggregate="sum" readonly="true"/>
+		<field name="trDP1" aggregate="sum" readonly="true"/>
+
+		<field name="avgROI" aggregate="sum" readonly="true">
+			<hilite if="avgROI &gt; 35" color="success" />
+			<hilite if="avgROI &gt;= 20 &amp;&amp; avgROI &lt;= 35 " color="info" />
+			<hilite if="avgROI &gt;= 15 &amp;&amp; avgROI &lt; 20 " color="warning" />
+			<hilite if="avgROI &lt; 15 " color="danger" />
+		</field>
+		<field name="avgLEADMRP" aggregate="sum" readonly="true">
+			<hilite if="avgLEADMRP > 0" color="info" />
+		</field>
+		<field name="avgARMRP" aggregate="sum" readonly="true">
+			<hilite if="avgARMRP > 0" color="info" />
+		</field>
+
+		<field name="plan" aggregate="sum" readonly="true">
+			<hilite if="plan > 0" background="grey" />
+		</field>
+		<field name="noAM" />
+		<field name="noTL" />
+		<field name="noH" />
+
+		<field name="dailyPlanningType" />
+		<field name="noteForSale" />
+		<field name="noteForLineManager" />
+	</grid>
+
+	<form name="neyu-daily-planning-form" title="Daily Planning" model="com.axelor.neyu.db.DailyPlanning">
+		<panel name="overviewPanal" title="Overview">
+			<field name="geo" />
+			<field name="aff" />
+			<field name="offer" />
+			<field name="sub" />
+
+			<field name="leadDM1" />
+			<field name="arqaDM1" />
+			<field name="trDM1" />
+
+			<field name="leadD0" />
+			<field name="arqaD0" />
+			<field name="trD0" />
+
+			<field name="leadDP1" />
+			<field name="arqaDP1" />
+			<field name="trDP1" />
+
+			<field name="avgROI" />
+			<field name="avgLEADMRP" />
+			<field name="avgARMRP" />
+
+			<field name="plan" />
+			<field name="noAM" />
+			<field name="noTL" />
+			<field name="noH" />
+
+			<field name="dailyPlanningType" />
+			<field name="noteForSale" />
+			<field name="noteForLineManager" />
+			<field name="dailyPlanningParrent" />
+			
+		</panel>
+	</form>
+
+</object-views>

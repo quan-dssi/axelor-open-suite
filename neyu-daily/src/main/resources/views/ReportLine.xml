@@ -4,14 +4,8 @@
 	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
   http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
 
-	<grid name="report-grid" title="Report"
+	<grid name="report-line-grid" title="Report"
 		model="com.axelor.daily.db.ReportLine" groupBy="nation" editable="true">
-		<toolbar>
-			<button name="rejectbtn" title="Reject" onClick="save"
-				hidden="true" />
-			<button name="savebtn" title="Save" onClick="save" />
-			<button name="submitbtn" title="Submit" onClick="save" />
-		</toolbar>
 		<field name="tl" readonly="true" />
 		<field name="am" readonly="true" />
 		<field name="aff" readonly="true" />
@@ -48,11 +42,11 @@
 		<field name="proof" canEdit="true" />
 		<field name="status" hidden="true" />
 		<field name="nation" hidden="true" />
-		<field name="report" domain="self.reportDate = __date__.plusDays(-1)"/>
+		<field name="report" hidden="true"/>
 	</grid>
 
 	<form model="com.axelor.daily.db.ReportLine" title="Report"
-		name="report-form" width="large">
+		name="report-line-form" width="large">
 		<panel>
 			<field name="status" grid-view="status-grid" colSpan="12"
 				widget="NavSelect" />
@@ -75,12 +69,6 @@
 			<field name="note" />
 			<field name="proof" />
 			<field name="nation" grid-view="nation-grid" />
-		</panel>
-		<panel sidebar="true">
-			<button name="rejectbtn" title="Reject" onClick="save"
-				hidden="true" />
-			<button name="savebtn" title="Save" onClick="save" />
-			<button name="submitbtn" title="Submit" onClick="save" />
 		</panel>
 	</form>
 </object-views>

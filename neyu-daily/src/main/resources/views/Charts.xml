@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+  
+  <chart stacked="true"
+    name="chart.daily.planing.manager.perform" title="Manager's Performance" width="mini">
+    <search-fields>
+      <field name="fromDate" title="From Date" type="date" x-required="true"/>
+      <field name="toDate" title="To Date" type="date" x-required="true"/>
+    </search-fields>
+    <dataset type="sql">
+     	SELECT 
+			COALESCE(SUM(ndp.leadd0), 0.00) AS _actual,
+			COALESCE(SUM(ndp.plan), 0.00) AS _plan,
+			COALESCE(SUM(ndp.trd0), 0.00) AS _trust,
+			'W'|| To_char(ndpp.date_import, 'WW') as _date
+		FROM neyu_daily_planning ndp JOIN neyu_daily_planning_parrent ndpp ON ndp.daily_planning_parrent = ndpp.id
+		where ndpp.date_import BETWEEN DATE(:fromDate) AND DATE(:toDate)
+		GROUP BY _date ORDER BY _date
+    </dataset>
+    <category key="_date" type="text" title="Date"/>
+    <series key="_plan" type="line" title="Planing Lead"/>
+  </chart>
+  
+  <chart stacked="true"
+    name="chart.daily.actual.manager.perform" title="Manager's Performance" width="mini">
+    <search-fields>
+      <field name="fromDate" title="From Date" type="date" x-required="true"/>
+      <field name="toDate" title="To Date" type="date" x-required="true"/>
+    </search-fields>
+    <dataset type="sql">
+     	SELECT 
+			COALESCE(SUM(ndp.leadd0), 0.00) AS _actual,
+			COALESCE(SUM(ndp.plan), 0.00) AS _plan,
+			COALESCE(SUM(ndp.trd0), 0.00) AS _trust,
+			'W'|| To_char(ndpp.date_import, 'WW') as _date
+		FROM neyu_daily_planning ndp JOIN neyu_daily_planning_parrent ndpp ON ndp.daily_planning_parrent = ndpp.id
+		where ndpp.date_import BETWEEN DATE(:fromDate) AND DATE(:toDate)
+		GROUP BY _date ORDER BY _date
+    </dataset>
+    <category key="_date" type="text" title="Date"/>
+    <series key="_actual" type="line" title="Actual Lead"/>
+  </chart>
+  
+  <chart stacked="true"
+    name="chart.daily.trust.manager.perform" title="Manager's Performance" width="mini">
+    <search-fields>
+      <field name="fromDate" title="From Date" type="date" x-required="true"/>
+      <field name="toDate" title="To Date" type="date" x-required="true" />
+    </search-fields>
+    <dataset type="sql">
+     	SELECT 
+			COALESCE(SUM(ndp.leadd0), 0.00) AS _actual,
+			COALESCE(SUM(ndp.plan), 0.00) AS _plan,
+			COALESCE(SUM(ndp.trd0), 0.00) AS _trust,
+			'W'|| To_char(ndpp.date_import, 'WW') as _date
+		FROM neyu_daily_planning ndp JOIN neyu_daily_planning_parrent ndpp ON ndp.daily_planning_parrent = ndpp.id
+		where ndpp.date_import BETWEEN DATE(:fromDate) AND DATE(:toDate)
+		GROUP BY _date ORDER BY _date
+    </dataset>
+    <category key="_date" type="text" title="Date"/>
+    <series key="_trust" type="bar" title="Trust rate"/>
+  </chart>
+  </object-views>
