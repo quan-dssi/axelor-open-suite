@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
+
+	<grid name="report-grid" title="Report"
+		model="com.axelor.daily.db.ReportLine" groupBy="nation" editable="true">
+		<toolbar>
+			<button name="rejectbtn" title="Reject" onClick="save"
+				hidden="true" />
+			<button name="savebtn" title="Save" onClick="save" />
+			<button name="submitbtn" title="Submit" onClick="save" />
+		</toolbar>
+		<field name="tl" readonly="true" />
+		<field name="am" readonly="true" />
+		<field name="aff" readonly="true" />
+		<field name="offer" readonly="true" />
+		<field name="sub" readonly="true" />
+		<field name="lead" aggregate="sum" readonly="true"
+			title="Lead __date__">
+			<hilite color="danger" if="true" />
+		</field>
+		<field name="ar_qa" aggregate="sum" readonly="true" />
+		<field name="tr" aggregate="sum" readonly="true" />
+		<field name="ar_mrp" aggregate="sum" readonly="true">
+			<hilite if="true" color="primary" />
+		</field>
+		<field name="lead_mrp" aggregate="sum" readonly="true">
+			<hilite if="true" color="primary" />
+		</field>
+		<field name="roi" aggregate="sum" readonly="true">
+			<hilite if="roi &gt; 35" color="success" />
+			<hilite if="roi &gt;= 20 &amp;&amp; roi &lt;= 35 "
+				color="info" />
+			<hilite if="roi &gt;= 15 &amp;&amp; roi &lt; 20 "
+				color="warning" />
+			<hilite if="roi &lt; 15 " color="danger" />
+		</field>
+		<field name="planned" aggregate="sum" readonly="true">
+			<hilite background="info" if="true" />
+		</field>
+		<field name="no_am" canEdit="true" />
+		<field name="no_tl" canEdit="true" />
+		<field name="no_head" canEdit="true" />
+		<field name="type" canEdit="true" />
+		<field name="note" canEdit="true" />
+		<field name="proof" canEdit="true" />
+		<field name="status" hidden="true" />
+		<field name="nation" hidden="true" />
+		<field name="report" domain="self.reportDate = __date__.plusDays(-1)"/>
+	</grid>
+
+	<form model="com.axelor.daily.db.ReportLine" title="Report"
+		name="report-form" width="large">
+		<panel>
+			<field name="status" grid-view="status-grid" colSpan="12"
+				widget="NavSelect" />
+			<field name="tl" />
+			<field name="am" />
+			<field name="aff" />
+			<field name="offer" />
+			<field name="sub" />
+			<field name="lead" />
+			<field name="ar_qa" />
+			<field name="tr" />
+			<field name="ar_mrp" />
+			<field name="lead_mrp" />
+			<field name="roi" />
+			<field name="planned" />
+			<field name="no_am" />
+			<field name="no_tl" />
+			<field name="no_head" />
+			<field name="type" grid-view="report-type-grid" />
+			<field name="note" />
+			<field name="proof" />
+			<field name="nation" grid-view="nation-grid" />
+		</panel>
+		<panel sidebar="true">
+			<button name="rejectbtn" title="Reject" onClick="save"
+				hidden="true" />
+			<button name="savebtn" title="Save" onClick="save" />
+			<button name="submitbtn" title="Submit" onClick="save" />
+		</panel>
+	</form>
+</object-views>

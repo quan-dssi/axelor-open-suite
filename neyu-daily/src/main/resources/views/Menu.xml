@@ -1,47 +1,68 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <object-views xmlns="http://axelor.com/xml/ns/object-views"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
   http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
 
-  <menuitem name="menu-daily" title="Daily"/>
+	<menuitem name="menu-daily" title="Daily" />
 
-  <menuitem name="menu-daily-planning" parent="menu-daily" title="Planning n Priority"
-    action=""/>
+	<menuitem name="menu-daily-planning" parent="menu-daily"
+		title="Planning n Priority" action="" />
 
-  <menuitem name="menu-daily-report" parent="menu-daily" title="Report" action="report.all"/>
+	<menuitem name="menu-daily-report" parent="menu-daily" title="Report" action="report.all" />
 
-  <menuitem title="Configuration" name="menu-daily-config" parent="menu-daily" action=""/>
+	<menuitem title="Configuration" name="menu-daily-config" parent="menu-daily" action="" />
 
-  <menuitem title="Report Type" name="menu-daily-config-report-type"
-    parent="menu-daily-config" action="report-type.all"/>
-  <menuitem title="Status" name="menu-daily-config-status" parent="menu-daily-config"
-    action="status.all"/>
-  <menuitem title="Nation" name="menu-daily-config-nation" parent="menu-daily-config"
-    action="nation.all"/>
+	<menuitem title="Report Type"
+		name="menu-daily-config-report-type" parent="menu-daily-config"
+		action="report-type.all" />
+		
+	<menuitem title="Status" name="menu-daily-config-status"
+		parent="menu-daily-config" action="status.all" />
+		
+	<menuitem title="Nation" name="menu-daily-config-nation"
+		parent="menu-daily-config" action="nation.all" />
 
-  <action-view name="report.all" title="Report" model="com.axelor.daily.db.Report">
-    <view type="grid" name="report-grid"/>
-    <view type="form" name="report-form"/>
-  </action-view>
+	<menuitem title="Report" name="menu-daily-config-report" parent="menu-daily-config" action="report2.all" />
 
-  <action-view name="report-type.all" title="Report Type"
-    model="com.axelor.daily.db.ReportType">
-    <view type="grid" name="report-type-grid"/>
-    <view type="form" name="report-type-form"/>
-    <view-param name="details-view" value="true"/>
-  </action-view>
+	<menuitem title="ReportLine" name="menu-daily-config-report-line" parent="menu-daily-config" action="report-line.all" />
 
-  <action-view name="status.all" title="status" model="com.axelor.daily.db.Status">
-    <view type="grid" name="status-grid"/>
-    <view type="form" name="status-form"/>
-    <view-param name="details-view" value="true"/>
-  </action-view>
+	<action-view name="report.all" title="Report"
+		model="com.axelor.daily.db.ReportLine">
+		<view type="grid" name="report-grid" />
+	</action-view>
 
-  <action-view name="nation.all" title="Nation" model="com.axelor.daily.db.Nation">
-    <view type="grid" name="nation-grid"/>
-    <view type="form" name="nation-form"/>
-    <view-param name="details-view" value="true"/>
-  </action-view>
+	<action-view name="report-type.all" title="Report Type" model="com.axelor.daily.db.ReportType">
+		<view type="grid" name="report-type-grid" />
+		<view type="form" name="report-type-form" />
+		<view-param name="details-view" value="true" />
+	</action-view>
+
+	<action-view name="status.all" title="status"
+		model="com.axelor.daily.db.Status">
+		<view type="grid" name="status-grid" />
+		<view type="form" name="status-form" />
+		<view-param name="details-view" value="true" />
+	</action-view>
+
+	<action-view name="nation.all" title="Nation"
+		model="com.axelor.daily.db.Nation">
+		<view type="grid" name="nation-grid" />
+		<view type="form" name="nation-form" />
+		<view-param name="details-view" value="true" />
+	</action-view>
+
+
+	<action-view name="report2.all" title="Report"
+		model="com.axelor.daily.db.Report">
+		<view type="grid" name="report2-grid" />
+		<view type="form" name="report2-form" />
+	</action-view>
+
+	<action-view name="report-line.all" title="Report Line"
+		model="com.axelor.daily.db.ReportLine">
+		<view type="grid" name="report-grid" />
+		<view type="form" name="report-form" />
+	</action-view>
 
 </object-views>
