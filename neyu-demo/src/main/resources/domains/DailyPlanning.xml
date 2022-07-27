@@ -35,6 +35,7 @@
 		<string name="noteForLineManager" title="Note For Line Manager"/>
 		
 		<string name="geo" title="Geos"/>
+		<many-to-one ref="DailyPlanningParrent" name="dailyPlanningParrent" title="Parrent"/>
 		
 	</entity>
 

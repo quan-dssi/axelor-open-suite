@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+
+	<grid name="neyu-daily-planning-parrent-grid" title="Daily Planning Parrent" model="com.axelor.neyu.db.DailyPlanningParrent">
+		<field name="dateImport" />
+		<field name="dailyPlanning" />
+	</grid>
+
+	<form name="neyu-daily-planning-parrent-form" title="Daily Planning Parrent" model="com.axelor.neyu.db.DailyPlanningParrent" width="large" >
+		<panel name="overviewPanal" title="Overview">
+			<field name="dateImport" />
+			<field name="dailyPlanning" grid-view="neyu-daily-planning-grid" canRemove="false" canNew="false"  edit-window="self" colSpan="12" />
+		</panel>
+		
+	<!-- 	<panel-related field="dailyPlanning" editable="true" edit-icon="false" canNew="false" canRemove="false" canView="false"/> -->
+	</form>
+
+
+</object-views>
