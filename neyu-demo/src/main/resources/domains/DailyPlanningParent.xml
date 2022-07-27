@@ -5,8 +5,9 @@
 	<module name="neyu" package="com.axelor.neyu.db" />
 
 	<entity name="DailyPlanningParrent">
-		<date name="dateImport" title="Date Import" />
-		<one-to-many ref="DailyPlanning" name="dailyPlanning" mappedBy="dailyPlanningParrent" title="Daily Planning"/>
+		<integer name="statusPlanning" title="Status" readonly="true" selection="daily.planning.status.select" default="0" />
+		<date name="dateImport" title="Report Date" />
+		<one-to-many ref="DailyPlanning" name="dailyPlanning" mappedBy="dailyPlanningParrent" title="Daily Planning" />
 	</entity>
 
 </domain-models>

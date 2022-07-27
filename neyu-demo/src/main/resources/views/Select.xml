@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+  
+  <selection name="daily.planning.status.select">
+    <option value="0">Draf</option>
+    <option value="1">Submited To Team Lead</option>
+    <option value="2">Submited to Head</option>
+    <option value="3">Rejected</option>
+    <option value="4">Completed</option>
+  </selection> 
+
+</object-views>

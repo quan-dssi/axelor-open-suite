@@ -2,19 +2,47 @@
 <object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
 
-	<grid name="neyu-daily-planning-parrent-grid" title="Daily Planning Parrent" model="com.axelor.neyu.db.DailyPlanningParrent">
+	<grid name="daily-planning-parrent-grid" title="Daily Planning Parrent" model="com.axelor.neyu.db.DailyPlanningParrent">
+		<field name="statusPlanning" />
 		<field name="dateImport" />
 		<field name="dailyPlanning" />
 	</grid>
 
-	<form name="neyu-daily-planning-parrent-form" title="Daily Planning Parrent" model="com.axelor.neyu.db.DailyPlanningParrent" width="large" >
-		<panel name="overviewPanal" title="Overview">
-			<field name="dateImport" />
-			<field name="dailyPlanning" grid-view="neyu-daily-planning-grid" canRemove="false" canNew="false"  edit-window="self" colSpan="12" />
+	<form name="daily-planning-parrent-form" title="Daily Planning Parrent" model="com.axelor.neyu.db.DailyPlanningParrent" width="large"
+		css="large-form-fullscreen" onLoad="action-hide-column-by-role">
+		<panel colSpan="12">
+			<field name="statusPlanning"  showTitle="false" widget="NavSelect" colSpan="6" readonly="true" />
+			<button name="submitToLeadBtn" hidden="true" title="Submit to Lead" colSpan="2" onClick="action-planning-submit-to-lead,save"  css="btn-primary" />
+			<button name="submitToHeadBtn" hidden="true" title="Submit to Head" colSpan="2" onClick="action-planning-submit-to-head,save" css="btn-primary" />
+			<button name="rejectBtn" hidden="true" title="Reject" onClick="action-planning-reject,save" colSpan="2" css="btn-danger" />
+			<button name="approveBtn" hidden="true" title="Approve" onClick="action-planning-approve,save" colSpan="2" css="btn-success" />
 		</panel>
-		
-	<!-- 	<panel-related field="dailyPlanning" editable="true" edit-icon="false" canNew="false" canRemove="false" canView="false"/> -->
+		<panel colSpan="12">
+			<field name="dateImport" />
+			<!-- <field name="dailyPlanning" grid-view="neyu-daily-planning-grid" canSelect="true" canRemove="false" canNew="true" edit-window="self" colSpan="12" /> -->
+		</panel>
+		<panel-related field="dailyPlanning" grid-view="neyu-daily-planning-grid" canSelect="true" editable="true" edit-window="self" height="20" colSpan="12"/>
 	</form>
 
+	<action-attrs name="action-hide-column-by-role" model="com.axelor.neyu.db.DailyPlanningParrent">
+		<attribute name="hidden" for="dailyPlanning.noTL" expr="true" if="__user__.group.code == 'AM'" />
+		<attribute name="hidden" for="dailyPlanning.noH" expr="true" if="__user__.group.code == 'AM'" />
+	</action-attrs>
+
+	<action-record name="action-planning-submit-to-lead" model="com.axelor.neyu.db.DailyPlanningParrent">
+		<field name="statusPlanning" expr="eval: 1" />
+	</action-record>
+
+	<action-record name="action-planning-submit-to-head" model="com.axelor.neyu.db.DailyPlanningParrent">
+		<field name="statusPlanning" expr="eval: 2" />
+	</action-record>
+
+	<action-record name="action-planning-reject" model="com.axelor.neyu.db.DailyPlanningParrent">
+		<field name="statusPlanning" expr="eval: 3" />
+	</action-record>
+
+	<action-record name="action-planning-approve" model="com.axelor.neyu.db.DailyPlanningParrent">
+		<field name="statusPlanning" expr="eval: 4" />
+	</action-record>
 
 </object-views>

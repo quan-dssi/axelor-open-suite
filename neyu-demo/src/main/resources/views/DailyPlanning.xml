@@ -2,47 +2,42 @@
 <object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
 
-	<grid name="neyu-daily-planning-grid" title="Daily Planning" groupBy="geo" model="com.axelor.neyu.db.DailyPlanning" editable="true" edit-icon="false">
-		<field name="geo" readonly="true"/>
-		<field name="aff" readonly="true"/>
-		<field name="offer" readonly="true"/>
-		<field name="sub" readonly="true"/>
-
-		<field name="leadDM1" aggregate="sum" readonly="true"/>
-		<field name="arqaDM1" aggregate="sum" readonly="true"/>
-		<field name="trDM1" aggregate="sum" readonly="true"/>
-
-		<field name="leadD0" aggregate="sum" readonly="true"/>
-		<field name="arqaD0" aggregate="sum" readonly="true"/>
-		<field name="trD0" aggregate="sum" readonly="true"/>
-
-		<field name="leadDP1" aggregate="sum" readonly="true"/>
-		<field name="arqaDP1" aggregate="sum" readonly="true"/>
-		<field name="trDP1" aggregate="sum" readonly="true"/>
-
-		<field name="avgROI" aggregate="sum" readonly="true">
-			<hilite if="avgROI &gt; 35" color="success" />
-			<hilite if="avgROI &gt;= 20 &amp;&amp; avgROI &lt;= 35 " color="info" />
-			<hilite if="avgROI &gt;= 15 &amp;&amp; avgROI &lt; 20 " color="warning" />
-			<hilite if="avgROI &lt; 15 " color="danger" />
+	<grid name="neyu-daily-planning-grid" title="Daily Planning" groupBy="geo" model="com.axelor.neyu.db.DailyPlanning" editable="true"
+		edit-icon="false">
+		<field name="geo" readonly="true" width="65" />
+		<field name="aff" readonly="true" width="60" />
+		<field name="offer" readonly="true" width="80" />
+		<field name="sub" readonly="true" width="60" />
+		<field name="leadDM1" readonly="true" aggregate="sum" width="95" />
+		<field name="arqaDM1" readonly="true" aggregate="sum" width="95" />
+		<field name="trDM1" readonly="true" aggregate="sum" width="85" />
+		<field name="leadD0" readonly="true" aggregate="sum" width="85" />
+		<field name="arqaD0" readonly="true" aggregate="sum" width="85" />
+		<field name="trD0" readonly="true" aggregate="sum" width="80" />
+		<field name="leadDP1" readonly="true" aggregate="sum" width="95" />
+		<field name="arqaDP1" readonly="true" aggregate="sum" width="100" />
+		<field name="trDP1" readonly="true" aggregate="sum" width="85" />
+		<field name="avgROI" readonly="true" aggregate="sum" width="85">
+			<hilite color="success" if="avgROI > 35" />
+			<hilite color="info" if="avgROI >= 20 &amp;&amp; avgROI &lt;= 35 " />
+			<hilite color="warning" if="avgROI >= 15 &amp;&amp; avgROI &lt; 20 " />
+			<hilite color="danger" if="avgROI &lt; 15 " />
 		</field>
-		<field name="avgLEADMRP" aggregate="sum" readonly="true">
-			<hilite if="avgLEADMRP > 0" color="info" />
+		<field name="avgLEADMRP" readonly="true" aggregate="sum" width="85">
+			<hilite color="info" if="avgLEADMRP > 0" />
 		</field>
-		<field name="avgARMRP" aggregate="sum" readonly="true">
-			<hilite if="avgARMRP > 0" color="info" />
+		<field name="avgARMRP" readonly="true" aggregate="sum" width="85">
+			<hilite color="info" if="avgARMRP > 0" />
 		</field>
-
-		<field name="plan" aggregate="sum" readonly="true">
-			<hilite if="plan > 0" background="grey" />
+		<field name="plan" readonly="true" aggregate="sum" width="65">
+			<hilite background="grey" if="plan > 0" />
 		</field>
-		<field name="noAM" />
-		<field name="noTL" />
-		<field name="noH" />
-
+		<field name="noAM" width="85" />
+		<field name="noTL" width="85" />
+		<field name="noH" width="85" />
 		<field name="dailyPlanningType" />
 		<field name="noteForSale" />
-		<field name="noteForLineManager" />
+		<field name="noteForLineManager"  />
 	</grid>
 
 	<form name="neyu-daily-planning-form" title="Daily Planning" model="com.axelor.neyu.db.DailyPlanning">
@@ -77,7 +72,7 @@
 			<field name="noteForSale" />
 			<field name="noteForLineManager" />
 			<field name="dailyPlanningParrent" />
-			
+
 		</panel>
 	</form>
 

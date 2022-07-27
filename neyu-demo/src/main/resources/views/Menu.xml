@@ -7,7 +7,8 @@
 	<menuitem title="All Team Management" name="menu-neyu-user-management" action="neyu.user.management.all" order="1" parent="menu-neyu-root" />
 
 	<menuitem title="Daily Planning" name="menu-neyu-daily-planning" action="neyu.daily.planning.all" order="2" parent="menu-neyu-root" />
-	<menuitem title="Daily Planning Parrent" name="menu-neyu-daily-planning-parrent" action="neyu.daily.planning.parrent.all" order="3" parent="menu-neyu-root" />
+	<menuitem title="Daily Planning Parrent" name="menu-neyu-daily-planning-parrent" action="neyu.daily.planning.parrent.all" order="3"
+		parent="menu-neyu-root" />
 	<menuitem title="Configuation" name="menu-neyu-configuation" order="4" parent="menu-neyu-root" />
 	<menuitem title="Daily Planning Type" name="menu-neyu-daily-planning-type" action="neyu.daily.planning.type.all" order="5"
 		parent="menu-neyu-configuation" />
@@ -35,8 +36,8 @@
 	</action-view>
 
 	<action-view title="Daily Planning Parrent" name="neyu.daily.planning.parrent.all" model="com.axelor.neyu.db.DailyPlanningParrent">
-		<view name="neyu-daily-planning-parrent-grid" type="grid" />
-		<view name="neyu-daily-planning-parrent-form" type="form" />
+		<view name="daily-planning-parrent-grid" type="grid" />
+		<view name="daily-planning-parrent-form" type="form" />
 	</action-view>
 
 </object-views>

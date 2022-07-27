@@ -6,8 +6,8 @@
   <module name="neyu" package="com.axelor.neyu.db"/>
 
   <entity name="DailyPlanningType">
-    	<string name="code" title="Code"></string>
-    	<string name="name" title="Name"></string>
+    <string name="code" title="Code"></string>
+    <string name="name" title="Name"></string>
   </entity>
 
 </domain-models>
