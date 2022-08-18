@@ -15,21 +15,20 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.axelor.apps.account.service.move;
+package com.axelor.apps.account.service.analytic;
 
-import com.axelor.apps.account.db.Move;
-import com.axelor.exception.AxelorException;
-import java.util.List;
+import com.axelor.apps.account.db.AnalyticMoveLine;
+import com.axelor.apps.account.db.MoveLine;
 
-public interface MoveSimulateService {
+public interface AnalyticMoveLineGenerateRealService {
+
   /**
-   * Check if simulate conditions are met and set move to simulate status
+   * Generate a real analytic move line from a forecast move line, by copying the forecast analytic
+   * move line and updating the links to related invoice and move line.
    *
-   * @param move
-   * @return
-   * @throws AxelorException
+   * @param forecastAnalyticMoveLine a forecast analytic move line that will be copied.
+   * @param moveLine the move line that will be linked to the created analytic move line.
+   * @return the created real analytic move line
    */
-  void simulate(Move move) throws AxelorException;
-
-  public void simulateMultiple(List<? extends Move> moveList) throws AxelorException;
+  AnalyticMoveLine createFromForecast(AnalyticMoveLine forecastAnalyticMoveLine, MoveLine moveLine);
 }
