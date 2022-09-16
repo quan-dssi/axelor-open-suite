@@ -20,8 +20,10 @@ package com.axelor.apps.base.exceptions;
 /**
  * Interface of Exceptions.
  *
+ * @deprecated Replaced by {@link BaseExceptionMessage}
  * @author dubaux
  */
+@Deprecated
 public interface IExceptionMessage {
 
   public static final String EXCEPTION = /*$$(*/ "Warning !" /*)*/;
@@ -467,6 +469,20 @@ public interface IExceptionMessage {
   public static final String PRICING_2 = /*$$(*/
       "There is already a pricing that has the selected pricing as previous pricing, for the product/category '%s', company '%s' and model '%s'." /*)*/;
 
+  public static final String PRICING_3 = /*$$(*/
+      "You are using a product for which the '%s' pricing should be applied.</br>However, it could not be applied.</br>Please check your pricing if this does not seem normal." /*)*/;
+
+  public static final String PREVIOUS_PERIOD_NOT_TEMP_CLOSED = /*$$(*/
+      "The previous period is not closed or temporarily closed." /*)*/;
+
+  public static final String PREVIOUS_PERIOD_NOT_CLOSED = /*$$(*/
+      "The previous period is not closed." /*)*/;
+
   public static final String CITIES_IMPORT_FAILED = /*$$(*/
       "Error: Cities cannot be imported. Please see the attached error file for more details" /*)*/;
+
+  public static final String META_JSON_TYPE_NO_MATCH_OBJECT_VALUE = /*$$(*/
+      "Error: The type of the field %s does not match the type of the value %s" /*)*/;
+  public static final String META_JSON_TYPE_NOT_MANAGED = /*$$(*/
+      "Error: The type of the field %s is not managed by the adapter" /*)*/;
 }
