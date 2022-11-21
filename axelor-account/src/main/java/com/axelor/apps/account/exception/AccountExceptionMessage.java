@@ -36,7 +36,7 @@ public final class AccountExceptionMessage {
   public static final String IMMO_FIXED_ASSET_GENERATE_SALE_MOVE_CATEGORY_ACCOUNTS_MISSING =
       /*$$(*/ "Fixed asset: sale move could not be generated because fixed category is missing one of theses account %s" /*)*/;
   public static final String IMMO_FIXED_ASSET_GENERATE_DISPOSAL_MOVE_CATEGORY_ACCOUNTS_MISSING =
-      /*$$(*/ "Fixed asset: disposal move could not be generated because fixed  category is missing one of theses account %s" /*)*/;
+      /*$$(*/ "Fixed asset: Disposal move could not be generated because the following account setting : '%s' is missing on the associated fixed asset category." /*)*/;
   public static final String IMMO_FIXED_ASSET_GENERATE_MOVE_CATEGORY_ACCOUNTS_MISSING =
       /*$$(*/ "Fixed asset: could not generate depreciation move because fixed category is one of missing theses account %s" /*)*/;
   public static final String IMMO_FIXED_ASSET_CATEGORY_ACCOUNTS_MISSING =
@@ -319,6 +319,8 @@ public final class AccountExceptionMessage {
       "The currency is missing on the account move %s" /*)*/;
   public static final String MOVE_VALIDATION_FISCAL_PERIOD_CLOSED = /*$$(*/
       "Accounting move can not be validated because its fiscal period is closed." /*)*/;
+  public static final String MOVE_PARTNER_IS_NOT_COMPATIBLE_WITH_SELECTED_JOURNAL = /*$$(*/
+      "The partner which was already selected is not compatible with the selected journal. Please reselect a compatible partner or modify the journal settings accordingly." /*)*/;
 
   /** Payment schedule export service */
   public static final String PAYMENT_SCHEDULE_1 = /*$$(*/

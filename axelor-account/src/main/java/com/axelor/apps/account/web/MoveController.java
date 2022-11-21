@@ -26,14 +26,13 @@ import com.axelor.apps.account.db.MoveLine;
 import com.axelor.apps.account.db.repo.MoveRepository;
 import com.axelor.apps.account.exception.AccountExceptionMessage;
 import com.axelor.apps.account.report.IReport;
-import com.axelor.apps.account.service.JournalService;
 import com.axelor.apps.account.service.PeriodServiceAccount;
 import com.axelor.apps.account.service.app.AppAccountService;
 import com.axelor.apps.account.service.config.AccountConfigService;
 import com.axelor.apps.account.service.extract.ExtractContextMoveService;
+import com.axelor.apps.account.service.journal.JournalCheckPartnerTypeService;
 import com.axelor.apps.account.service.move.MoveComputeService;
 import com.axelor.apps.account.service.move.MoveCounterPartService;
-import com.axelor.apps.account.service.move.MoveCreateFromInvoiceService;
 import com.axelor.apps.account.service.move.MoveLineControlService;
 import com.axelor.apps.account.service.move.MoveRemoveService;
 import com.axelor.apps.account.service.move.MoveReverseService;
@@ -44,6 +43,7 @@ import com.axelor.apps.account.service.move.MoveViewHelperService;
 import com.axelor.apps.account.service.moveline.MoveLineService;
 import com.axelor.apps.account.service.moveline.MoveLineTaxService;
 import com.axelor.apps.account.service.moveline.MoveLineToolService;
+import com.axelor.apps.base.db.Company;
 import com.axelor.apps.base.db.Period;
 import com.axelor.apps.base.db.repo.YearRepository;
 import com.axelor.apps.base.service.PeriodService;
@@ -67,6 +67,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import org.apache.commons.collections.CollectionUtils;
 
 @Singleton
@@ -104,20 +105,17 @@ public class MoveController {
 
     Move move = request.getContext().asType(Move.class);
 
+    Period period = null;
     try {
       if (move.getDate() != null && move.getCompany() != null) {
-        Period period =
+        period =
             Beans.get(PeriodService.class)
-                .getPeriod(move.getDate(), move.getCompany(), YearRepository.TYPE_FISCAL);
-        if (period != null && (move.getPeriod() == null || !period.equals(move.getPeriod()))) {
-
-          response.setValue("period", period);
-        }
-      } else {
-        response.setValue("period", null);
+                .getActivePeriod(move.getDate(), move.getCompany(), YearRepository.TYPE_FISCAL);
       }
     } catch (Exception e) {
       TraceBackService.trace(response, e);
+    } finally {
+      response.setValue("period", period);
     }
   }
 
@@ -222,6 +220,12 @@ public class MoveController {
       this.removeOneMove(move, response);
 
       if (!move.getStatusSelect().equals(MoveRepository.STATUS_ACCOUNTED)) {
+        boolean isActivateSimulatedMoves =
+            Optional.of(AuthUtils.getUser())
+                .map(User::getActiveCompany)
+                .map(Company::getAccountConfig)
+                .map(AccountConfig::getIsActivateSimulatedMove)
+                .orElse(false);
 
         response.setView(
             ActionView.define(I18n.get("Moves"))
@@ -229,6 +233,7 @@ public class MoveController {
                 .add("grid", "move-grid")
                 .add("form", "move-form")
                 .param("search-filters", "move-filters")
+                .context("_isActivateSimulatedMoves", isActivateSimulatedMoves)
                 .map());
         response.setCanClose(true);
       }
@@ -579,27 +584,18 @@ public class MoveController {
     }
   }
 
-  public void filterJournalPartnerCompatibleType(ActionRequest request, ActionResponse response) {
-    try {
-      Move move = request.getContext().asType(Move.class);
-      String journalPartnerCompatibleDomain =
-          Beans.get(JournalService.class).filterJournalPartnerCompatibleType(move);
-      if (journalPartnerCompatibleDomain != null) {
-        response.setAttr("partner", "domain", journalPartnerCompatibleDomain);
-      }
-    } catch (Exception e) {
-      TraceBackService.trace(response, e, ResponseMessageType.ERROR);
-    }
-  }
-
   public void onChangeJournal(ActionRequest request, ActionResponse response) {
     try {
       Move move = request.getContext().asType(Move.class);
       if (move.getPartner() != null) {
-        boolean isPartnerNotCompatible =
-            Beans.get(MoveCreateFromInvoiceService.class).isPartnerNotCompatible(move);
-        if (isPartnerNotCompatible) {
+        boolean isPartnerCompatible =
+            Beans.get(JournalCheckPartnerTypeService.class)
+                .isPartnerCompatible(move.getJournal(), move.getPartner());
+        if (!isPartnerCompatible) {
           response.setValue("partner", null);
+          response.setNotify(
+              I18n.get(
+                  AccountExceptionMessage.MOVE_PARTNER_IS_NOT_COMPATIBLE_WITH_SELECTED_JOURNAL));
         }
       }
     } catch (Exception e) {
